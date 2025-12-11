@@ -1,0 +1,39 @@
+name: ir-sde-testing-10000-40
+suffix: ~  # add suffix to saved images
+model: denoising
+distortion: deblur
+gpu_ids: [0]
+
+sde:
+  max_sigma: 10
+  T: 100
+  schedule: cosine # linear, cosine
+  eps: 0.005
+  
+degradation:
+  # for denoising
+  sigma: 25
+  noise_type: G # Gaussian noise: G
+
+datasets:
+  #number_of_samples: 2
+  n_workers: 1  
+  batch_size: 8
+  dataset: chex
+  csv_path_LQ: /lotterlab/project_data/CheXpert_noise/metadata_photon_10000.csv
+  csv_path_GT: /lotterlab/users/matteo/data/CheXpert/metadata.csv
+  dataroot_LQ: /lotterlab/project_data/CheXpert_noise
+  dataroot_GT: /lotterlab/datasets/
+
+#### network structures
+network_G:
+  which_model_G: ConditionalUNet
+  setting:
+    in_nc: 1
+    out_nc: 1
+    nf: 64
+    depth: 4
+
+#### path
+path:
+  pretrain_model_G: /lotterlab/users/matteo/models/SDE-10000-40_G.pth

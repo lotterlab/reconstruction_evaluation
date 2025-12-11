@@ -1,0 +1,17 @@
+output_dir: './output'
+output_name: 'unet-chex'
+save_interval: 1
+dataset: 'chex'
+
+num_epochs: 20
+learning_rate: 0.0001
+batch_size: 16
+early_stopping_patience: 5
+
+csv_path_A: ../CheXpert_noise/metadata_photon_10000.csv
+csv_path_B: ../CheXpert/metadata.csv
+dataroot_A: ../CheXpert_noise
+dataroot_B: ../CheXpert
+
+network_type: 'UNet'
+seed: 31415

@@ -1,0 +1,34 @@
+name: ucsf_diffusion_8_eodd
+results_path: ./predictions-EODD-fairness
+batch_size: 64
+num_workers: 8
+
+datasets:
+  name: ucsf
+  dataroot: ./data/UCSF-PDGM
+  processed_image_root: ./processed_images/eodd/ucsf/ucsf_SDE-8-eodd
+  sampling_mask: radial  # or linear
+  seed: 31415
+  type: FLAIR  # or other MRI type
+  pathology: []  # list of pathologies to include
+  lower_slice: 60
+  upper_slice: 130
+  split: test
+  num_rays: 60
+
+models:
+  network: Diffusion
+
+  
+task_models: 
+  name: ucsf
+  models: 
+    - type: classifier
+      name: TGradeBCEClassifier
+      path: ./models/tgrade/checkpoints/tgrade.pth
+    - type: classifier
+      name: TTypeBCEClassifier
+      path: ./models/ttype/checkpoints/ttype.pth
+    - type: segmentation
+      name: UNet
+      path: ./models/segmentation_skews/segmentatio/segmentation.pth

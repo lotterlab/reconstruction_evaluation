@@ -1,0 +1,44 @@
+
+name: ucsf-evaluation
+
+results_path: output
+
+mode: ucsf
+
+predictions: 
+    - acceleration: 4
+      model: unet
+      predictions: './predictions/ucsf_unet_4/ucsf_unet_4_results.csv'
+      fairness: False
+    - acceleration: 8
+      model: unet
+      predictions: './predictions/ucsf_unet_8/ucsf_unet_8_results.csv'
+      fairness: True
+    - acceleration: 16
+      model: unet
+      predictions: './predictions/ucsf_unet_16/ucsf_unet_16_results.csv'
+      fairness: False
+    - acceleration: 4
+      model: pix2pix
+      predictions: './predictions/ucsf_gan_4/ucsf_gan_4_results.csv'
+      fairness: False
+    - acceleration: 8
+      model: pix2pix
+      predictions: './predictions/ucsf_gan_8/ucsf_gan_8_results.csv'
+      fairness: True
+    - acceleration: 16
+      model: pix2pix
+      predictions: './predictions/ucsf_gan_16/ucsf_gan_16_results.csv'
+      fairness: False
+    - acceleration: 4
+      model: sde
+      predictions: './predictions/ucsf_diffusion_4/ucsf_diffusion_4_results.csv'
+      fairness: False
+    - acceleration: 8
+      model: sde
+      predictions: './predictions/ucsf_diffusion_8/ucsf_diffusion_8_results.csv'
+      fairness: True
+    - acceleration: 16
+      model: sde
+      predictions: './predictions/ucsf_diffusion_16/ucsf_diffusion_16_results.csv'
+      fairness: False

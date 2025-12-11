@@ -1,0 +1,52 @@
+name: ucsf_SDE-8-eodd
+results_path: ./processed_images/eodd/ucsf
+batch_size: 16
+num_workers: 4
+
+paths:
+  recon_bias: ./code/recon_bias
+  pix2pix: ./code/pix2pix
+  sde: ./code/image-restoration-sde
+
+datasets:
+  name: ucsf
+  dataroot: ./data/UCSF-PDGM
+  sampling_mask: radial  # or linear
+  seed: 31415
+  type: FLAIR  # or other MRI type
+  pathology: []  # list of pathologies to include
+  lower_slice: 60
+  upper_slice: 130
+  split: test
+  num_rays: 60
+
+models:
+  network: Diffusion
+
+model: denoising
+distortion: deblur
+gpu_ids: [0]
+
+sde:
+  max_sigma: 10
+  T: 100
+  schedule: cosine # linear, cosine
+  eps: 0.005
+  
+degradation:
+  # for denoising
+  sigma: 25
+  noise_type: G
+
+
+network_G:
+  which_model_G: ConditionalUNet
+  setting:
+    in_nc: 1
+    out_nc: 1
+    nf: 64
+    depth: 4
+
+path:
+  pretrain_model_G: ./code/image-restoration-sde/experiments/deblurring/ucsf-sde-8-fairness-eodd/models/160_G.pth
+  strict_load: True

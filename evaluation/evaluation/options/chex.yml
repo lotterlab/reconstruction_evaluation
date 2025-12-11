@@ -1,0 +1,43 @@
+
+name: chex-evaluation
+results_path: output
+
+mode: chex
+
+predictions: 
+    - photon_count: 100000
+      model: unet
+      predictions: './predictions/chex_unet_100000/chex_unet_100000_results.csv'
+      fairness: False
+    - photon_count: 10000
+      model: unet
+      predictions: './predictions/chex_unet_10000/chex_unet_10000_results.csv'
+      fairness: True
+    - photon_count: 3000
+      model: unet
+      predictions: './predictions/chex_unet_3000/chex_unet_3000_results.csv'
+      fairness: False
+    - photon_count: 100000
+      model: pix2pix
+      predictions: './predictions/chex_gan_100000/chex_gan_100000_results.csv'
+      fairness: False
+    - photon_count: 10000
+      model: pix2pix
+      predictions: './predictions/chex_gan_10000/chex_gan_10000_results.csv'
+      fairness: True
+    - photon_count: 3000
+      model: pix2pix
+      predictions: './predictions/chex_gan_3000/chex_gan_3000_results.csv'
+      fairness: False
+    - photon_count: 100000
+      model: sde
+      predictions: './predictions/chex_diffusion_100000/chex_diffusion_100000_results.csv'
+      fairness: False
+    - photon_count: 10000
+      model: sde
+      predictions: './predictions/chex_diffusion_10000/chex_diffusion_10000_results.csv'
+      fairness: True
+    - photon_count: 3000
+      model: sde
+      predictions: './predictions/chex_diffusion_3000/chex_diffusion_3000_results.csv'
+      fairness: False

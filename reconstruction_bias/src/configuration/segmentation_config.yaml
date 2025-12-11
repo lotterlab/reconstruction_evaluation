@@ -1,0 +1,16 @@
+output_dir: './output'
+output_name: 'segmentation'
+save_interval: 1
+
+num_epochs: 100
+learning_rate: 0.001
+batch_size: 8
+
+dataroot: '../../data/UCSF-PDGM'
+type: 'FLAIR'
+lower_slice: 60
+upper_slice: 130
+age_bins: [0, 58, 100]
+
+sampling_mask: 'radial'
+seed: 31415

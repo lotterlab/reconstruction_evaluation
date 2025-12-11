@@ -1,0 +1,49 @@
+name: chex_SDE-10000-eodd
+results_path: ./processed_images/eodd/chex
+batch_size: 32
+num_workers: 4
+
+paths:
+  recon_bias: ./code/recon_bias
+  pix2pix: ./code/pix2pix
+  sde: ./code/image-restoration-sde
+
+datasets:
+  name: chex
+  csv_path_A: ./CheXpert_noise/metadata_photon_10000.csv
+  csv_path_B: ./CheXpert/metadata.csv
+  dataroot_A: ./CheXpert_noise
+  dataroot_B: ./CheXpert
+  seed: 31415
+  split: test
+
+models:
+  network: Diffusion
+
+model: denoising
+distortion: deblur
+gpu_ids: [0]
+
+sde:
+  max_sigma: 10
+  T: 100
+  schedule: cosine # linear, cosine
+  eps: 0.005
+  
+degradation:
+  # for denoising
+  sigma: 25
+  noise_type: G
+
+
+network_G:
+  which_model_G: ConditionalUNet
+  setting:
+    in_nc: 1
+    out_nc: 1
+    nf: 64
+    depth: 4
+
+path:
+  pretrain_model_G: ./code/image-restoration-sde/experiments/deblurring/chex10000-sde-fairness-eodd/models/40_G.pth
+  strict_load: True

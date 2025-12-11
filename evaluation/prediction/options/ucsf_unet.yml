@@ -1,0 +1,33 @@
+name: ucsf_unet_08
+results_path: ./predictions_adv
+batch_size: 64
+num_workers: 8
+
+datasets:
+  name: ucsf
+  dataroot: ./data/UCSF-PDGM
+  sampling_mask: radial
+  seed: 31415
+  type: FLAIR
+  pathology: []
+  lower_slice: 60
+  upper_slice: 130
+  split: test
+  num_rays: 60
+
+models:
+  network: UNet
+  model_path: ./models/unet-ucsf.pth
+  
+task_models: 
+  name: ucsf
+  models: 
+    - type: classifier
+      name: TGradeBCEClassifier
+      path: ./models/tgrade/checkpoints/tgrade.pth
+    - type: classifier
+      name: TTypeBCEClassifier
+      path: ./models/ttype/checkpoints/ttype.pth
+    - type: segmentation
+      name: UNet
+      path: ./models/segmentation_skews/segmentatio/segmentation.pth
