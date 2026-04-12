@@ -1,5 +1,9 @@
 # Evaluating the Impact of Medical Image Reconstruction on Downstream AI Fairness and Performance
 
+**Matteo Wohlrapp, Niklas Bubeck, Daniel Rueckert, William Lotter. Evaluating the Impact of Medical Image Reconstruction on Downstream AI Fairness and Performance. MIDL (2026).**
+
+---
+
 ## Code Structure
 
 The code is organized into the following directories, each containing its own README with detailed information:
